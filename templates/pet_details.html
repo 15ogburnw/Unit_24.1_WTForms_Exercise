@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %} Pet Details {% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h1 class="display-3 text-center">{{pet.name}} The {{pet.species.capitalize()}}</h1>
+
+    <div class="row justify-content-center">
+        <img src="{{pet.photo_url}}" class="col-6 img-fluid my-4">
+    </div>
+
+    <h2 class="text-center">{{pet.name}} is {{pet.age}} years old</h2>
+
+    <div class="row justify-content-center">
+        <form class="col-6" method="post">
+            {{ form.hidden_tag() }}
+
+            {% for field in form if field.widget.input_type != 'hidden' %}
+            <div class="form-group">
+                {{ field.label(class='form-label') }}
+                {{ field(class='form-control') }}
+                {% for error in field.errors %}
+                <span class="badge bg-danger">{{error}}</span>
+                {% endfor %}
+            </div>
+            {% endfor %}
+            <button class="btn btn-outline-success mt-3 btn-lg">Save Changes</button>
+        </form>
+    </div>
+    
+</div>
+
+
+{% endblock %}
